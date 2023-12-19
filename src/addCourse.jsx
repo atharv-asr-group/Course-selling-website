@@ -5,6 +5,7 @@ import { useState } from 'react';
 function AddCourse(){
     const [title,setTitle]=useState('')
     const [description,setDescription]=useState('')
+    const [image,setImage]=useState('')
     return(
         <div>
                     <Card varient={'outlined'} >
@@ -18,6 +19,10 @@ function AddCourse(){
                   onChange={(e)=>{
                     setDescription(e.target.value);
                   }}/>
+                  <TextField id="outlined-basic" label="Image Link" variant="outlined"  fullWidth={true}
+                  onChange={(e)=>{
+                    setImage(e.target.value);
+                  }}/>
                   <Button variant="contained"
         onClick={()=>{
              fetch("http://localhost:3000/admin/courses",{
@@ -25,7 +30,7 @@ function AddCourse(){
                 body: JSON.stringify({
                     title,
                     description,
-                    imageLink:"",
+                    imageLink:image,
                     published: true
                 }),
                 headers:{
