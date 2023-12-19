@@ -14,27 +14,33 @@ function Course(){
         ).then((res)=>{
             res.json().then((data)=>{
                 setCourses(data.courses);
-                console.log(data);
+                // console.log(data);
             })
         })
         
     },[])
-    let course;
+    let course=null;
     for(let i=0;i<courses.length;i++){
+        // console.log(courses[i]._id)
+        
         if(courses[i]._id==courseId){
+            // console.log("in here")
             course=courses[i]
         }
     }
     if(!course){
         return <>
+        {/* {course.id} */}
         No Course available with the ID.
         </>
     }
     return ( 
         
         <div>
+            {/* {courses[0]._id} */}
             <CourseCard course={course}></CourseCard>
-            <UpdateCard course={course}></UpdateCard>
+            
+            <UpdateCard course={course} setCourses={setCourses} courses={courses}></UpdateCard>
         </div>
 )
 }
@@ -63,7 +69,7 @@ function UpdateCard(props){
                     setImage(e.target.value);
                   }}/>
                   <Button variant="contained"
-        onClick={()=>{
+            onClick={()=>{
              fetch("http://localhost:3000/admin/courses/"+course._id,{
                 method:"PUT",
                 body: JSON.stringify({
@@ -81,7 +87,30 @@ function UpdateCard(props){
             }).then((data)=>{
                 // localStorage.setItem("token", data.token);
                 // console.log(data);
-                alert('course updated');
+                let updatedCourses=[];
+                for(let i=0;i<props.courses.length;i++){
+                    // {props.courses[0].id}
+                    // console.log(props.courses[i]._id)
+                    // console.log(course._id)
+                    // {props.courses[i]._id}
+                    if(props.courses[i]._id==course._id){
+                        console.log(typeof(course._id))
+                        updatedCourses.push({
+                            _id:course._id,
+                            title:title,
+                            description:description,
+                            imageLink: image
+                        })  
+                        // console.log(course._id)
+                        // console.log(updatedCourses[i]._id)
+                    }
+                    else{
+                        updatedCourses.push(props.courses[i])
+                    }
+                }
+                // console.log(updatedCourses[0]._id)
+                props.setCourses(updatedCourses);
+                // alert('course updated');
             })
         }}>Update Course</Button>
                     </Card>
@@ -89,7 +118,7 @@ function UpdateCard(props){
 }
 function CourseCard(props){
     return ( 
-        
+        <div style={{display:"flex", justifyContent:"center"}}>
         <Card style={{
             minHeight:200,
             width: 300,
@@ -100,6 +129,7 @@ function CourseCard(props){
         <Typography textAlign={"center"}>{props.course.description}</Typography>
         <img src={props.course.imageLink} alt="" style={{width:300}}/>
         </Card>
+        </div>
 )
 }
 export default Course;
