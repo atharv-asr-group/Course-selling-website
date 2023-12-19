@@ -6,7 +6,7 @@ import Appbar from './Appbar.jsx'
 import AddCourse from './addCourse.jsx'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Courses from './Courses.jsx'
-
+import Course from './Course.jsx'
 function App() {
 
   return (
@@ -18,6 +18,7 @@ function App() {
           <Route path="/courses" element={<Courses/>}></Route>
           <Route path="/login" element={<Signin/>}/>
           <Route path="/signup" element={<Signup/>}/>
+          <Route path="/course/:courseId" element={<Course/>}/>
 
         </Routes>
       </Router>
