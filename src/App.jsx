@@ -7,11 +7,14 @@ import AddCourse from './addCourse.jsx'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Courses from './Courses.jsx'
 import Course from './Course.jsx'
+import {RecoilRoot} from 'recoil';
+
 function App() {
 
   return (
     <div style={{width:"100vw", height: "100vh", backgroundColor:"#eeeeee"}}>
       <Appbar/>
+      <RecoilRoot>
       <Router>
         <Routes>
           <Route path="/addcourse" element={<AddCourse/>}></Route>
@@ -21,7 +24,9 @@ function App() {
           <Route path="/course/:courseId" element={<Course/>}/>
 
         </Routes>
+
       </Router>
+      </RecoilRoot>
     </div>
   )
 }
