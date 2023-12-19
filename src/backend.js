@@ -157,4 +157,10 @@ app.get('/users/purchasedCourses', authenticateJwt, async (req, res) => {
   }
 });
 
+app.get('/admin/me', authenticateJwt, (req,res)=>{
+  res.json({
+    username: req.user.username
+  })
+})
+
 app.listen(3000, () => console.log('Server running on port 3000'));
