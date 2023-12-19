@@ -35,8 +35,9 @@ function AddCourse(){
             }).then((res)=>{
                 return res.json()
             }).then((data)=>{
-                localStorage.setItem("token", data.token);
-                console.log(data);
+                // localStorage.setItem("token", data.token);
+                // console.log(data);
+                alert('course added')
             })
         }}>Add Course</Button>
                     </Card>

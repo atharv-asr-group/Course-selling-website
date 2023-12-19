@@ -9,6 +9,7 @@ function Courses(){
         }}
         ).then((res)=>{
             res.json().then((data)=>{
+                setCourses(data);
                 console.log(data);
             })
         })
@@ -16,8 +17,12 @@ function Courses(){
     },[])
     return (
         <div>
-            
+            COURSES
+            {JSON.stringify(courses)}
         </div>
     )
 }
+
+
+
 export default Courses;
